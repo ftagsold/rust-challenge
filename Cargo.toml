@@ -1,0 +1,25 @@
+[package]
+name = "rust-challenge"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix-cors = "0.6.4"
+actix-web = { version="4.3.1", features=["openssl"] }
+aes-gcm = "0.10.1"
+env_logger = "0.10.0"
+log = "0.4.17"
+openssl = "0.10.46"
+regex = "1.7.3"
+tokio = { version="1.27.0", features=["macros"] }
+
+[profile.release]
+lto = true
+opt-level = 3
+codegen-units = 1
+
+[profile.release.package."*"]
+opt-level = 3
+codegen-units = 1
