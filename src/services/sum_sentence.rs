@@ -11,9 +11,11 @@ pub async fn sum_sentence(file_path: &str) -> String {
 
     let mut result = Vec::new();
 
+    let file = File::open(file_path).unwrap();
+
     let split = ['.', ';', '?', '!'].as_ref();
 
-    let reader = BufReader::new(File::open(file_path).unwrap());
+    let reader = BufReader::new(file);
 
     for line in reader.lines() {
         let line = line.unwrap();
