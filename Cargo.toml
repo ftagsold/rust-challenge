@@ -13,6 +13,7 @@ env_logger = "0.10.0"
 log = "0.4.17"
 openssl = "0.10.46"
 regex = "1.7.3"
+serde = { version = "1.0.153", features = ["derive"] }
 tokio = { version="1.27.0", features=["macros"] }
 
 [profile.release]

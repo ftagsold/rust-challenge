@@ -10,13 +10,13 @@ pub fn decrypt() -> Result<(), Box<dyn std::error::Error>> {
     let mut encrypted_data = Vec::new();
     file.read_to_end(&mut encrypted_data)?;
 
-    let key_raw = read_key()?;
-    let nonce_raw = read_nonce()?;
+    let key_str = read_key()?;
+    let nonce_str = read_nonce()?;
 
-    let nonce = Nonce::<U16>::from_slice(nonce_raw.as_slice());
-    let cipher = Aes256Gcm::new_from_slice(key_raw.as_bytes())?;
+    let nonce = Nonce::<U16>::from_slice(nonce_str.as_slice());
+    let cipher = Aes256Gcm::new_from_slice(key_str.as_bytes())?;
 
-    if let Ok(decrypted) = cipher.decrypt(&Nonce::clone(nonce), Payload::from(encrypted_data.as_slice())) {
+    if let Ok(decrypted) = cipher.decrypt(nonce, Payload::from(encrypted_data.as_slice())) {
         let mut output_file = File::create("./secret.dec")?;
         output_file.write_all(&decrypted)?;
 
